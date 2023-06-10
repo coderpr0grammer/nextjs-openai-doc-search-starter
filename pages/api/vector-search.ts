@@ -64,25 +64,25 @@ export default async function handler(req: NextRequest) {
       })
     }
 
-    const embeddingResponse = await fetch('https://api.openai.com/v1/embeddings', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${openAiKey}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        model: 'text-embedding-ada-002',
-        input: sanitizedQuery.replaceAll('\n', ' '),
-      }),
-    })
+    // const embeddingResponse = await fetch('https://api.openai.com/v1/embeddings', {
+    //   method: 'POST',
+    //   headers: {
+    //     Authorization: `Bearer ${openAiKey}`,
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify({
+    //     model: 'text-embedding-ada-002',
+    //     input: sanitizedQuery.replaceAll('\n', ' '),
+    //   }),
+    // })
 
-    if (embeddingResponse.status !== 200) {
-      throw new ApplicationError('Failed to create embedding for question', embeddingResponse)
-    }
+    // if (embeddingResponse.status !== 200) {
+    //   throw new ApplicationError('Failed to create embedding for question', embeddingResponse)
+    // }
 
-    const {
-      data: [{ embedding }],
-    } = await embeddingResponse.json()
+    // const {
+    //   data: [{ embedding }],
+    // } = await embeddingResponse.json()
 
     // const { error: matchError, data: pageSections } = await supabaseClient.rpc(
     //   'match_page_sections',
