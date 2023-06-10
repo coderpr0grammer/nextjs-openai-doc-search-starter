@@ -55,6 +55,7 @@ export default async function handler(req: NextRequest) {
       }),
     }).then((res) => res.json()).catch(()=> console.log("error getting moderation response"));
 
+    console.log(moderationResponse)
     // const [results] = moderationResponse.results
 
     // if (results.flagged) {
