@@ -53,7 +53,7 @@ export default async function handler(req: NextRequest) {
       body: JSON.stringify({
         input: sanitizedQuery,
       }),
-    }).then((res) => res.json())
+    }).then((res) => res.json()).catch(()=> console.log("error getting moderation response"));
 
     const [results] = moderationResponse.results
 
