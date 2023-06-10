@@ -159,12 +159,12 @@ export default async function handler(req: NextRequest) {
     //   throw new ApplicationError('Failed to generate completion', error)
     // }
 
-    // // Proxy the streamed SSE response from OpenAI
-    // return new Response(response.body, {
-    //   headers: {
-    //     'Content-Type': 'text/event-stream',
-    //   },
-    // })
+    // Proxy the streamed SSE response from OpenAI
+    return new Response(response.body, {
+      headers: {
+        'Content-Type': 'text/event-stream',
+      },
+    })
   } catch (err: unknown) {
     if (err instanceof UserError) {
       return new Response(
