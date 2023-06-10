@@ -56,15 +56,15 @@ export default async function handler(req: NextRequest) {
       }),
     }).then((res) => {console.log (res.json()); return res.json()}).catch(()=> console.log("error getting moderation response"));
 
-    console.log(moderationResponse)
-    // const [results] = moderationResponse.results
+    // console.log(moderationResponse)
+    const [results] = moderationResponse.results
 
-    // if (results.flagged) {
-    //   throw new UserError('Flagged content', {
-    //     flagged: true,
-    //     categories: results.categories,
-    //   })
-    // }
+    if (results.flagged) {
+      throw new UserError('Flagged content', {
+        flagged: true,
+        categories: results.categories,
+      })
+    }
 
     // const embeddingResponse = await fetch('https://api.openai.com/v1/embeddings', {
     //   method: 'POST',
