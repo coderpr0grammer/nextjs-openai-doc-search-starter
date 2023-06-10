@@ -160,7 +160,7 @@ export default async function handler(req: NextRequest) {
     }
 
     // Proxy the streamed SSE response from OpenAI
-    return new Response(response.body, {
+    return new Response(moderationResponse, {
       headers: {
         'Content-Type': 'text/event-stream',
       },
