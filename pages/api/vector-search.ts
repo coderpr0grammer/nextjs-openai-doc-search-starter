@@ -44,6 +44,7 @@ export default async function handler(req: NextRequest) {
 
     // Moderate the content to comply with OpenAI T&C
     const sanitizedQuery = query.trim()
+    console.log(sanitizedQuery)
     const moderationResponse = await fetch('https://api.openai.com/v1/moderations', {
       method: 'POST',
       headers: {
