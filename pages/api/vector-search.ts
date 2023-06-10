@@ -54,7 +54,7 @@ export default async function handler(req: NextRequest) {
       body: JSON.stringify({
         input: sanitizedQuery,
       }),
-    }).then((res) => {console.log (res.json()); return res.json()}).catch(()=> console.log("error getting moderation response"));
+    }).then((res) =>  res.json()).catch(()=> console.log("error getting moderation response"));
 
     // console.log(moderationResponse)
     const [results] = moderationResponse.results
@@ -66,98 +66,98 @@ export default async function handler(req: NextRequest) {
       })
     }
 
-    // const embeddingResponse = await fetch('https://api.openai.com/v1/embeddings', {
-    //   method: 'POST',
-    //   headers: {
-    //     Authorization: `Bearer ${openAiKey}`,
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({
-    //     model: 'text-embedding-ada-002',
-    //     input: sanitizedQuery.replaceAll('\n', ' '),
-    //   }),
-    // })
+    const embeddingResponse = await fetch('https://api.openai.com/v1/embeddings', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${openAiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: 'text-embedding-ada-002',
+        input: sanitizedQuery.replaceAll('\n', ' '),
+      }),
+    })
 
-    // if (embeddingResponse.status !== 200) {
-    //   throw new ApplicationError('Failed to create embedding for question', embeddingResponse)
-    // }
+    if (embeddingResponse.status !== 200) {
+      throw new ApplicationError('Failed to create embedding for question', embeddingResponse)
+    }
 
-    // const {
-    //   data: [{ embedding }],
-    // } = await embeddingResponse.json()
+    const {
+      data: [{ embedding }],
+    } = await embeddingResponse.json()
 
-    // const { error: matchError, data: pageSections } = await supabaseClient.rpc(
-    //   'match_page_sections',
-    //   {
-    //     embedding,
-    //     match_threshold: 0.78,
-    //     match_count: 10,
-    //     min_content_length: 50,
-    //   }
-    // )
+    const { error: matchError, data: pageSections } = await supabaseClient.rpc(
+      'match_page_sections',
+      {
+        embedding,
+        match_threshold: 0.78,
+        match_count: 10,
+        min_content_length: 50,
+      }
+    )
 
-    // if (matchError) {
-    //   throw new ApplicationError('Failed to match page sections', matchError)
-    // }
+    if (matchError) {
+      throw new ApplicationError('Failed to match page sections', matchError)
+    }
 
-    // const tokenizer = new GPT3Tokenizer({ type: 'gpt3' })
-    // let tokenCount = 0
-    // let contextText = ''
+    const tokenizer = new GPT3Tokenizer({ type: 'gpt3' })
+    let tokenCount = 0
+    let contextText = ''
 
-    // for (let i = 0; i < pageSections.length; i++) {
-    //   const pageSection = pageSections[i]
-    //   const content = pageSection.content
-    //   const encoded = tokenizer.encode(content)
-    //   tokenCount += encoded.text.length
+    for (let i = 0; i < pageSections.length; i++) {
+      const pageSection = pageSections[i]
+      const content = pageSection.content
+      const encoded = tokenizer.encode(content)
+      tokenCount += encoded.text.length
 
-    //   if (tokenCount >= 1500) {
-    //     break
-    //   }
+      if (tokenCount >= 1500) {
+        break
+      }
 
-    //   contextText += `${content.trim()}\n---\n`
-    // }
+      contextText += `${content.trim()}\n---\n`
+    }
 
-    // const prompt = codeBlock`
-    //   ${oneLine`
-    //     You are a very enthusiastic Supabase representative who loves
-    //     to help people! Given the following sections from the Supabase
-    //     documentation, answer the question using only that information,
-    //     outputted in markdown format. If you are unsure and the answer
-    //     is not explicitly written in the documentation, say
-    //     "Sorry, I don't know how to help with that."
-    //   `}
+    const prompt = codeBlock`
+      ${oneLine`
+        You are a very enthusiastic Supabase representative who loves
+        to help people! Given the following sections from the Supabase
+        documentation, answer the question using only that information,
+        outputted in markdown format. If you are unsure and the answer
+        is not explicitly written in the documentation, say
+        "Sorry, I don't know how to help with that."
+      `}
 
-    //   Context sections:
-    //   ${contextText}
+      Context sections:
+      ${contextText}
 
-    //   Question: """
-    //   ${sanitizedQuery}
-    //   """
+      Question: """
+      ${sanitizedQuery}
+      """
 
-    //   Answer as markdown (including related code snippets if available):
-    // `
+      Answer as markdown (including related code snippets if available):
+    `
 
-    // const completionOptions: CreateCompletionRequest = {
-    //   model: 'text-davinci-003',
-    //   prompt,
-    //   max_tokens: 512,
-    //   temperature: 0,
-    //   stream: true,
-    // }
+    const completionOptions: CreateCompletionRequest = {
+      model: 'text-davinci-003',
+      prompt,
+      max_tokens: 512,
+      temperature: 0,
+      stream: true,
+    }
 
-    // const response = await fetch('https://api.openai.com/v1/completions', {
-    //   method: 'POST',
-    //   headers: {
-    //     Authorization: `Bearer ${openAiKey}`,
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(completionOptions),
-    // })
+    const response = await fetch('https://api.openai.com/v1/completions', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${openAiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(completionOptions),
+    })
 
-    // if (!response.ok) {
-    //   const error = await response.json()
-    //   throw new ApplicationError('Failed to generate completion', error)
-    // }
+    if (!response.ok) {
+      const error = await response.json()
+      throw new ApplicationError('Failed to generate completion', error)
+    }
 
     // Proxy the streamed SSE response from OpenAI
     return new Response(response.body, {
