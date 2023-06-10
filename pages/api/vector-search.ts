@@ -55,7 +55,12 @@ export default async function handler(req: NextRequest) {
       }),
     }).then((res) => res.json()).catch(()=> console.log("error getting moderation response"));
 
- 
+    // Proxy the streamed SSE response from OpenAI
+    return new Response("hello world", {
+      headers: {
+        'Content-Type': 'text/event-stream',
+      },
+    })
   } catch (err: unknown) {
     if (err instanceof UserError) {
       return new Response(
