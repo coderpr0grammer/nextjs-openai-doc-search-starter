@@ -7,6 +7,10 @@
   min-height: 100vh;
 }
 
+.drag-and-drop {
+  cursor:pointer;
+}
+
 .description {
   display: inherit;
   justify-content: inherit;
