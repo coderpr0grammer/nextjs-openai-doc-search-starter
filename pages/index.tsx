@@ -15,6 +15,7 @@ export default function Home() {
 
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isDragging, setIsDragging] = useState(false);
+  const [files, setFiles] = useState<File[] | null>(null);
 
   const handleDragEnter = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
@@ -29,6 +30,7 @@ export default function Home() {
   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     setIsDragging(false);
+    console.log(event.dataTransfer.files);
     const file = event.dataTransfer.files[0];
     setSelectedFile(file);
   };
