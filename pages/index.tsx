@@ -47,20 +47,7 @@ export default function Home() {
       onDrop={handleDrop}
     >
       {/* File upload overlay */}
-      {isDragging && (
-        <div className={styles.overlay}>
-          <div className={styles.uploadIcon}>
-            <i className="fas fa-cloud-upload-alt"></i>
-          </div>
-        </div>
-      )}
-
-      {/* File preview */}
-      {selectedFile && (
-        <div className={styles.preview}>
-          {/* Render file preview here */}
-        </div>
-      )}
+      
       <Head>
         <title>Next.js OpenAI Template</title>
         <meta
@@ -71,6 +58,16 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main} onDrop={handleDrop} onDragOver={(event) => event.preventDefault()}>
+        <div className={styles.overlay}>
+          <div className={styles.uploadIcon}>
+            <i className="fas fa-cloud-upload-alt"></i>
+          </div>
+        </div>
+
+      {/* File preview */}
+        <div className={styles.preview}>
+          {/* Render file preview here */}
+        </div>
         <div className={styles.center}>
           <input type="file"/>
           <SearchDialog />
