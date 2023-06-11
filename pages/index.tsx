@@ -10,7 +10,6 @@ import { faCloudArrowUp } from '@fortawesome/free-solid-svg-icons'
 import FileUploadBox from './FileUploadBox'
 
 const inter = Inter({ subsets: ['latin'] })
-
 export default function Home() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [isDragging, setIsDragging] = useState(false)
