@@ -21,7 +21,7 @@ const FileUploadBox: React.FC = () => {
         isDragActive ? 'border-primary' : 'border-gray-300'
       }`}
     >
-      <input {...getInputProps()} accept=".txt,.pdf,.mp4" />
+      <input {...getInputProps()} accept="text/*,video/*"/>
 
       {files.length === 0 ? (
         <>
