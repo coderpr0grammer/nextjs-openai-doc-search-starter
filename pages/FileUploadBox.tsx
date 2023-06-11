@@ -22,7 +22,7 @@ const FileUploadBox: React.FC = () => {
     <div
       {...getRootProps()}
       className={`drag-and-drop p-4 border-2 rounded-lg ${
-        isDragActive ? 'border-primary border-dashed' : 'border-gray-300'
+        isDragActive ? 'border-primary' : 'border-gray-300 border-dashed'
       }`}
     >
       <input {...getInputProps()} accept="text/*,video/*" />
