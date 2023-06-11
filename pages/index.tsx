@@ -16,6 +16,7 @@ export default function Home() {
 
   const handleDrop = (event: React.DragEvent<HTMLBodyElement>) => {
     event.preventDefault();
+    console.log("dropping")
     const file = event.dataTransfer.files[0];
     setSelectedFile(file);
   };
