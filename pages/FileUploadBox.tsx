@@ -21,7 +21,7 @@ const FileUploadBox: React.FC = () => {
   return (
     <div
       {...getRootProps()}
-      className={`drag-and-drop p-4 border-2 rounded-lg ${
+      className={`drag-and-drop p-4 rounded-lg ${
         isDragActive ? 'border-primary' : 'border-gray-300 border-dashed'
       }`}
     >
