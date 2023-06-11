@@ -130,7 +130,7 @@ export default function Home() {
             </div>
           )}
 
-          <div className="py-8 w-full flex items-center justify-center">
+          <div className={styles.center}>
             {/* <SearchDialog /> */}
             <br></br>
             <input type="file" onChange={handleFileChange} multiple accept="text/*,video/*" />
