@@ -40,8 +40,9 @@ export default function Home() {
       </Head>
       <main className={styles.main} onDrop={handleDrop} onDragOver={(event) => event.preventDefault()}>
         <div className={styles.center}>
+          <input type="file"/>
           <SearchDialog />
- <input type="file" onChange={handleFileChange} />
+        <input type="file" onChange={handleFileChange} />
         </div>
         <div className="py-8 w-full flex items-center justify-center space-x-6">
             <Link href="https://supabase.com" className="flex items-center justify-center">
