@@ -42,6 +42,16 @@ export default function Home() {
     setFiles(files);
   };
 
+  const renderFilePreview = (file: File) => {
+    if (file.type.startsWith('image/')) {
+      return <img src={URL.createObjectURL(file)} alt={file.name} />;
+    } else if (file.type.startsWith('video/')) {
+      return <video src={URL.createObjectURL(file)} controls />;
+    } else {
+      return <p>{file.name}</p>;
+    }
+  };
+
   return (
     <>
      <div
@@ -79,10 +89,24 @@ export default function Home() {
         </div>
       )}
 
+      {/* File preview */}
+      
+      {files && files.length > 0 && (
+        <div className={styles.preview}>
+          {files.map((file, index) => (
+            <div key={index}>
+              {renderFilePreview(file)}
+              <p>{file.name}</p>
+              <p>{file.size} bytes</p>
+              <p>{file.type}</p>
+            </div>
+          ))}
+        </div>
+      )}
+
         <div className={styles.center}>
-          <input type="file" multiple/>
           <SearchDialog />
-        <input type="file"  onChange={handleFileChange} />
+        <input type="file"  onChange={handleFileChange} multiple />
         </div>
         <div className="py-8 w-full flex items-center justify-center space-x-6">
             <Link href="https://supabase.com" className="flex items-center justify-center">
