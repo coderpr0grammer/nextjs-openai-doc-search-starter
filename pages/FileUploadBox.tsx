@@ -1,18 +1,22 @@
-import React, { useCallback, useState } from 'react';
-import { useDropzone } from 'react-dropzone';
-import { FiUpload } from 'react-icons/fi';
+import React, { useCallback, useState } from 'react'
+import { useDropzone } from 'react-dropzone'
+import { FiUpload } from 'react-icons/fi'
 
 const FileUploadBox: React.FC = () => {
-  const [files, setFiles] = useState<File[]>([]);
+  const [files, setFiles] = useState<File[]>([])
 
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
-      setFiles(acceptedFiles);
+      const filteredFiles = files.filter(
+        (file) => file.type.startsWith('text/') || file.type.startsWith('video/')
+      )
+
+      setFiles(filteredFiles)
     },
     [setFiles]
-  );
+  )
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 
   return (
     <div
@@ -21,7 +25,7 @@ const FileUploadBox: React.FC = () => {
         isDragActive ? 'border-primary' : 'border-gray-300'
       }`}
     >
-      <input {...getInputProps()} accept="text/*,video/*"/>
+      <input {...getInputProps()} accept="text/*,video/*" />
 
       {files.length === 0 ? (
         <>
@@ -37,13 +41,11 @@ const FileUploadBox: React.FC = () => {
               <li key={file.name}>{file.name}</li>
             ))}
           </ul>
-          <p className="mt-2 text-sm text-gray-500">
-            {files.length} file(s) selected.
-          </p>
+          <p className="mt-2 text-sm text-gray-500">{files.length} file(s) selected.</p>
         </>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default FileUploadBox;
+export default FileUploadBox
