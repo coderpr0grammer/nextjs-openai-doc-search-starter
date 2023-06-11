@@ -6,9 +6,9 @@ import { CreateCompletionRequest } from 'openai'
 import { ApplicationError, UserError } from '@/lib/errors'
 
 // OpenAIApi does currently not work in Vercel Edge Functions as it uses Axios under the hood.
-// export const config = {
-//   runtime: 'edge',
-// }
+export const config = {
+  runtime: 'edge',
+}
 
 const openAiKey = process.env.OPENAI_KEY
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
