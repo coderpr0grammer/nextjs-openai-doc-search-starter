@@ -30,6 +30,13 @@ export default function Home() {
     setSelectedFile(file);
   };
 
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+    if (files && files.length > 0) {
+      setSelectedFile(files[0]);
+    }
+  };
+
   return (
     <>
      <div
