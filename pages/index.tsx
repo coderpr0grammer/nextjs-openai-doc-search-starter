@@ -35,6 +35,7 @@ export default function Home() {
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
+    console.log(files)
     if (files && files.length > 0) {
       setSelectedFile(files[0]);
     }
@@ -78,7 +79,7 @@ export default function Home() {
       )}
 
         <div className={styles.center}>
-          <input type="file"/>
+          <input type="file" multiple/>
           <SearchDialog />
         <input type="file"  onChange={handleFileChange} />
         </div>
