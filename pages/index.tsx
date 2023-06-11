@@ -13,10 +13,18 @@ export default function Home() {
 
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
-  const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
+
+  const handleDrop = (event: React.DragEvent<HTMLBodyElement>) => {
     event.preventDefault();
     const file = event.dataTransfer.files[0];
     setSelectedFile(file);
+  };
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+    if (files && files.length > 0) {
+      setSelectedFile(files[0]);
+    }
   };
 
   return (
@@ -33,7 +41,7 @@ export default function Home() {
       <main className={styles.main} onDrop={handleDrop} onDragOver={(event) => event.preventDefault()}>
         <div className={styles.center}>
           <SearchDialog />
-          <input type="file" onChange={(event) => setSelectedFile(event.target.files[0])} />
+ <input type="file" onChange={handleFileChange} />
         </div>
         <div className="py-8 w-full flex items-center justify-center space-x-6">
             <Link href="https://supabase.com" className="flex items-center justify-center">
