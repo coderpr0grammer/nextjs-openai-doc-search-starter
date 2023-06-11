@@ -9,7 +9,6 @@ import { ApplicationError, UserError } from '@/lib/errors'
 // export const config = {
 //   runtime: 'edge',
 // }
-
 const openAiKey = process.env.OPENAI_KEY
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
