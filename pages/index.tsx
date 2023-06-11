@@ -134,7 +134,7 @@ export default function Home() {
             {/* <SearchDialog /> */}
             <br></br>
             <input type="file" onChange={handleFileChange} multiple accept="text/*,video/*" />
-            or drag and drop your files anywhere 
+            <br></br>or drag and drop your files anywhere 
             (accepts only text files and videos)
           </div>
           <div className="py-8 w-full flex items-center justify-center space-x-6">
