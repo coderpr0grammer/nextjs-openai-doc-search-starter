@@ -22,6 +22,7 @@ export default function Home() {
   };
 
   const handleDragLeave = () => {
+    console.log('leaving drag');
     setIsDragging(false);
   };
 
@@ -45,7 +46,7 @@ export default function Home() {
       className={styles.main}
       onDragEnter={handleDragEnter}
       onDragLeave={handleDragLeave}
-      onDragOver={(event) => {event.preventDefault(); console.log(event)}}
+      onDragOver={(event) => {event.preventDefault(); setIsDragging(true)}}
       onDrop={handleDrop}
     >
       
