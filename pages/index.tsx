@@ -132,10 +132,6 @@ export default function Home() {
 
           <div className={styles.center}>
             {/* <SearchDialog /> */}
-            <br></br>
-            <input type="file" onChange={handleFileChange} multiple accept="text/*,video/*" />
-            <br></br>or drag and drop your files anywhere 
-            (accepts only text files and videos)
           </div>
           <FileUploadBox />
           <div className="py-8 w-full flex items-center justify-center space-x-6">
