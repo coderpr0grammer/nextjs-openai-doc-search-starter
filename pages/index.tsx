@@ -18,11 +18,13 @@ export default function Home() {
     event.preventDefault();
     console.log("dropping")
     const file = event.dataTransfer.files[0];
+    console.log('dropping file: ', file)
     setSelectedFile(file);
   };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
+    console.log(files)
     if (files && files.length > 0) {
       setSelectedFile(files[0]);
     }
