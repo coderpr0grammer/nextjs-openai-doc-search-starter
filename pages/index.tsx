@@ -62,7 +62,7 @@ export default function Home() {
 
         {/* File upload overlay */}
       {isDragging && (
-        <div className={styles.overlay} style={{background: 'red'}}>
+        <div className={styles.overlay} style={{background: 'red', width: 100, height:100}}>
           <div className={styles.uploadIcon}>
             <FontAwesomeIcon icon={faCloudArrowUp} color="white" />
           </div>
@@ -71,7 +71,7 @@ export default function Home() {
 
       {/* File preview */}
       {selectedFile && (
-        <div className={styles.preview} style={{background: 'red'}}>
+        <div className={styles.preview} style={{background: 'red',  width: 100, height:100}}>
           {/* Render file preview here */}
         </div>
       )}
