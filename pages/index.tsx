@@ -7,6 +7,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCloudArrowUp } from '@fortawesome/free-solid-svg-icons'
+import FileUploadBox from './FileUploadBox'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -137,6 +138,7 @@ export default function Home() {
             <br></br>or drag and drop your files anywhere 
             (accepts only text files and videos)
           </div>
+          <FileUploadBox />
           <div className="py-8 w-full flex items-center justify-center space-x-6">
             <Link href="https://skm.alonesolutions.ca" className="flex items-center justify-center">
               <Image src={'/icon-128.png'} width="20" height="20" alt="Supabase logo" />
