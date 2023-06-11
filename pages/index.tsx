@@ -35,7 +35,6 @@ export default function Home() {
           <SearchDialog />
           <input type="file" onChange={(event) => setSelectedFile(event.target.files[0])} />
         </div>
-
         <div className="py-8 w-full flex items-center justify-center space-x-6">
             <Link href="https://supabase.com" className="flex items-center justify-center">
               <p className="text-base mr-2">Built by Supabase</p>
