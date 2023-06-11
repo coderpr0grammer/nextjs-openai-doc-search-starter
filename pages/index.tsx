@@ -5,6 +5,8 @@ import styles from '@/styles/Home.module.css'
 import { SearchDialog } from '@/components/SearchDialog'
 import Image from 'next/image'
 import Link from 'next/link'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCloudArrowUp } from '@fortawesome/free-solid-svg-icons'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -46,7 +48,6 @@ export default function Home() {
       onDragOver={(event) => event.preventDefault()}
       onDrop={handleDrop}
     >
-      {/* File upload overlay */}
       
       <Head>
         <title>Next.js OpenAI Template</title>
@@ -58,16 +59,23 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main} onDrop={handleDrop} onDragOver={(event) => event.preventDefault()}>
+
+        {/* File upload overlay */}
+      {isDragging && (
         <div className={styles.overlay}>
           <div className={styles.uploadIcon}>
-            <i className="fas fa-cloud-upload-alt"></i>
+            <FontAwesomeIcon icon={faCloudArrowUp} />
           </div>
         </div>
+      )}
 
       {/* File preview */}
+      {selectedFile && (
         <div className={styles.preview}>
           {/* Render file preview here */}
         </div>
+      )}
+
         <div className={styles.center}>
           <input type="file"/>
           <SearchDialog />
