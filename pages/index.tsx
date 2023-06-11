@@ -33,13 +33,19 @@ export default function Home() {
     console.log(event.dataTransfer.files);
     const file = event.dataTransfer.files[0];
     const files = Array.from(event.dataTransfer.files);
-    setFiles(files);
+    const filteredFiles = files.filter(
+      (file) => file.type.startsWith('text/') || file.type.startsWith('video/')
+    );
+    setFiles(filteredFiles);
     setSelectedFile(file);
   };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(event.target.files || []);
-    setFiles(files);
+    const filteredFiles = files.filter(
+      (file) => file.type.startsWith('text/') || file.type.startsWith('video/')
+    );
+    setFiles(filteredFiles);
   };
 
   const renderFilePreview = (file: File) => {
@@ -106,7 +112,8 @@ export default function Home() {
 
         <div className={styles.center}>
           <SearchDialog />
-        <input type="file"  onChange={handleFileChange} multiple />
+          <br></br>
+        <input type="file"  onChange={handleFileChange} multiple  accept="text/*,video/*"/>
         </div>
         <div className="py-8 w-full flex items-center justify-center space-x-6">
             <Link href="https://supabase.com" className="flex items-center justify-center">
