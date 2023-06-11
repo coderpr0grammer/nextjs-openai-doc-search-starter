@@ -102,3 +102,7 @@ a {
     color-scheme: dark;
   }
 }
+
+.drag-and-drop {
+  cursor:pointer;
+}
