@@ -63,7 +63,7 @@ export default function Home() {
 
         {/* File upload overlay */}
       {isDragging && (
-        <div className={styles.overlay} style={{background: 'red', width: 100, height:100}}>
+        <div className={styles.overlay} style={{background: 'rgba(255, 0, 0, 0.8)', width: '100vw', height:'100vh', margin: 0, padding: 0, display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'absolute', }}>
           <div className={styles.uploadIcon}>
             <FontAwesomeIcon icon={faCloudArrowUp} color="white" style={{width:50, height: 50}}/>
           </div>
