@@ -114,12 +114,6 @@ export default function Home() {
             </div>
           )}
 
-          {/* File preview */}
-          {selectedFile && (
-            <div className={styles.preview} style={{ background: 'red', width: 100, height: 100 }}>
-              {/* Render file preview here */}
-            </div>
-          )}
 
           {/* File preview */}
 
