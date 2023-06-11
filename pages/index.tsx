@@ -12,26 +12,48 @@ export default function Home() {
 
 
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
 
-
-  const handleDrop = (event: React.DragEvent<HTMLBodyElement>) => {
+  const handleDragEnter = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
-    console.log("dropping")
-    const file = event.dataTransfer.files[0];
-    console.log('dropping file: ', file)
-    setSelectedFile(file);
+    setIsDragging(true);
   };
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files;
-    console.log(files)
-    if (files && files.length > 0) {
-      setSelectedFile(files[0]);
-    }
+  const handleDragLeave = () => {
+    setIsDragging(false);
+  };
+
+  const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    setIsDragging(false);
+    const file = event.dataTransfer.files[0];
+    setSelectedFile(file);
   };
 
   return (
     <>
+     <div
+      className={styles.main}
+      onDragEnter={handleDragEnter}
+      onDragLeave={handleDragLeave}
+      onDragOver={(event) => event.preventDefault()}
+      onDrop={handleDrop}
+    >
+      {/* File upload overlay */}
+      {isDragging && (
+        <div className={styles.overlay}>
+          <div className={styles.uploadIcon}>
+            <i className="fas fa-cloud-upload-alt"></i>
+          </div>
+        </div>
+      )}
+
+      {/* File preview */}
+      {selectedFile && (
+        <div className={styles.preview}>
+          {/* Render file preview here */}
+        </div>
+      )}
       <Head>
         <title>Next.js OpenAI Template</title>
         <meta
@@ -45,7 +67,7 @@ export default function Home() {
         <div className={styles.center}>
           <input type="file"/>
           <SearchDialog />
-        <input type="file" onChange={handleFileChange} />
+        <input type="file"  onChange={handleFileChange} />
         </div>
         <div className="py-8 w-full flex items-center justify-center space-x-6">
             <Link href="https://supabase.com" className="flex items-center justify-center">
@@ -73,6 +95,7 @@ export default function Home() {
             </div>
           </div>
       </main>
+      </div>
     </>
   )
 }
