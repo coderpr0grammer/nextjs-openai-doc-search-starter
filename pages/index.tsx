@@ -131,14 +131,14 @@ export default function Home() {
           )}
 
           <div className={styles.center}>
-            <SearchDialog />
+            {/* <SearchDialog /> */}
             <br></br>
             <input type="file" onChange={handleFileChange} multiple accept="text/*,video/*" />
           </div>
           <div className="py-8 w-full flex items-center justify-center space-x-6">
             <Link href="https://skm.alonesolutions.ca" className="flex items-center justify-center">
-              <p className="text-base mr-2">SkmAi</p>
               <Image src={'/icon-128.png'} width="20" height="20" alt="Supabase logo" />
+              <p className="text-base mr-2">SkmAI</p>
             </Link>
           </div>
         </main>
