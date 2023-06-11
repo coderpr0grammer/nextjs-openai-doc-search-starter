@@ -45,7 +45,7 @@ export default function Home() {
       className={styles.main}
       onDragEnter={handleDragEnter}
       onDragLeave={handleDragLeave}
-      onDragOver={(event) => event.preventDefault()}
+      onDragOver={(event) => {event.preventDefault(); console.log(event)}}
       onDrop={handleDrop}
     >
       
@@ -64,7 +64,7 @@ export default function Home() {
       {isDragging && (
         <div className={styles.overlay} style={{background: 'red', width: 100, height:100}}>
           <div className={styles.uploadIcon}>
-            <FontAwesomeIcon icon={faCloudArrowUp} color="white" />
+            <FontAwesomeIcon icon={faCloudArrowUp} color="white" size={50}/>
           </div>
         </div>
       )}
