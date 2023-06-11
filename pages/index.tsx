@@ -44,7 +44,7 @@ export default function Home() {
 
   const renderFilePreview = (file: File) => {
     if (file.type.startsWith('image/')) {
-      return <img src={URL.createObjectURL(file)} alt={file.name} />;
+      return <img src={URL.createObjectURL(file)} alt={file.name} style={{aspectRatio: '1 / 1', width: 50}}/>;
     } else if (file.type.startsWith('video/')) {
       return <video src={URL.createObjectURL(file)} controls />;
     } else {
