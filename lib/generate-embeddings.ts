@@ -331,34 +331,41 @@ async function generateEmbeddings() {
 
       // We use checksum to determine if this page & its sections need to be regenerated
       if (!shouldRefresh && existingPage?.checksum === checksum) {
-        const existingParentPage = existingPage?.parentPage as Singular<
-          typeof existingPage.parentPage
-        >
+        const existingParentPage = existingPage.parentPage
+        if (existingParentPage && existingParentPage.length > 0) {
+          const parentPageElement = existingParentPage[0] // Access the correct element from the array
+          if (parentPageElement.path !== parentPath) {
+            // Rest of your code
+            // ...
 
-        // If parent page changed, update it
-        if (existingParentPage?.path !== parentPath) {
-          console.log(`[${path}] Parent page has changed. Updating to '${parentPath}'...`)
-          const { error: fetchParentPageError, data: parentPage } = await supabaseClient
-            .from('nods_page')
-            .select()
-            .filter('path', 'eq', parentPath)
-            .limit(1)
-            .maybeSingle()
+            // If parent page changed, update it
+            if (existingParentPage?.path !== parentPath) {
+              console.log(`[${path}] Parent page has changed. Updating to '${parentPath}'...`)
+              const { error: fetchParentPageError, data: parentPage } = await supabaseClient
+                .from('nods_page')
+                .select()
+                .filter('path', 'eq', parentPath)
+                .limit(1)
+                .maybeSingle()
 
-          if (fetchParentPageError) {
-            throw fetchParentPageError
-          }
+              if (fetchParentPageError) {
+                throw fetchParentPageError
+              }
 
-          const { error: updatePageError } = await supabaseClient
-            .from('nods_page')
-            .update({ parent_page_id: parentPage?.id })
-            .filter('id', 'eq', existingPage.id)
+              const { error: updatePageError } = await supabaseClient
+                .from('nods_page')
+                .update({ parent_page_id: parentPage?.id })
+                .filter('id', 'eq', existingPage.id)
 
-          if (updatePageError) {
-            throw updatePageError
+              if (updatePageError) {
+                throw updatePageError
+              }
+            }
+            continue
           }
         }
-        continue
+
+        // ...
       }
 
       if (existingPage) {

@@ -1,3 +1,4 @@
+import React, {useState} from 'react';
 import Head from 'next/head'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
@@ -8,6 +9,16 @@ import Link from 'next/link'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+
+
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
+  const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    const file = event.dataTransfer.files[0];
+    setSelectedFile(file);
+  };
+
   return (
     <>
       <Head>
@@ -19,13 +30,13 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
+      <main className={styles.main} onDrop={handleDrop} onDragOver={(event) => event.preventDefault()}>
         <div className={styles.center}>
           <SearchDialog />
+          <input type="file" onChange={(event) => setSelectedFile(event.target.files[0])} />
         </div>
 
         <div className="py-8 w-full flex items-center justify-center space-x-6">
-          <div className="opacity-75 transition hover:opacity-100 cursor-pointer">
             <Link href="https://supabase.com" className="flex items-center justify-center">
               <p className="text-base mr-2">Built by Supabase</p>
               <Image src={'/supabase.svg'} width="20" height="20" alt="Supabase logo" />
@@ -50,7 +61,6 @@ export default function Home() {
               </Link>
             </div>
           </div>
-        </div>
       </main>
     </>
   )
