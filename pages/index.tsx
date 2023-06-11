@@ -66,13 +66,13 @@ export default function Home() {
     <>
       <div
         className={styles.main}
-        onDragEnter={handleDragEnter}
-        onDragLeave={handleDragLeave}
-        onDragOver={(event) => {
-          event.preventDefault()
-          setIsDragging(true)
-        }}
-        onDrop={handleDrop}
+        // onDragEnter={handleDragEnter}
+        // onDragLeave={handleDragLeave}
+        // onDragOver={(event) => {
+        //   event.preventDefault()
+        //   setIsDragging(true)
+        // }}
+        // onDrop={handleDrop}
       >
         <Head>
           <title>Next.js OpenAI Template</title>
