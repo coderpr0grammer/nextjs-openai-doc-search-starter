@@ -64,7 +64,7 @@ export default function Home() {
       {isDragging && (
         <div className={styles.overlay}>
           <div className={styles.uploadIcon}>
-            <FontAwesomeIcon icon={faCloudArrowUp} />
+            <FontAwesomeIcon icon={faCloudArrowUp} color="white" />
           </div>
         </div>
       )}
