@@ -19,31 +19,32 @@ const FileUploadBox: React.FC = () => {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 
   return (
-    <div
-      {...getRootProps()}
-      className={`drag-and-drop p-4 rounded-lg border-gray-300 ${
-        isDragActive ? 'border-primary border-dashed border ' : ' '
-      }`}
-    >
-      <input {...getInputProps()} accept="text/*,video/*" />
+    <div {...getRootProps()} style={{width: '100vw', height: '100vh'}}>
+      <div
+        className={`drag-and-drop p-4 rounded-lg border-gray-300 ${
+          isDragActive ? 'border-primary border-dashed border ' : ' '
+        }`}
+      >
+        <input {...getInputProps()} accept="text/*,video/*" />
 
-      {files.length === 0 ? (
-        <>
-          <FiUpload className="mx-auto h-12 w-12 text-gray-400" />
-          <p className="mt-2 text-sm text-gray-500">
-            Drag and drop your files here, or click to select files.
-          </p>
-        </>
-      ) : (
-        <>
-          <ul>
-            {files.map((file) => (
-              <li key={file.name}>{file.name}</li>
-            ))}
-          </ul>
-          <p className="mt-2 text-sm text-gray-500">{files.length} file(s) selected.</p>
-        </>
-      )}
+        {files.length === 0 ? (
+          <>
+            <FiUpload className="mx-auto h-12 w-12 text-gray-400" />
+            <p className="mt-2 text-sm text-gray-500">
+              Drag and drop your files here, or click to select files.
+            </p>
+          </>
+        ) : (
+          <>
+            <ul>
+              {files.map((file) => (
+                <li key={file.name}>{file.name}</li>
+              ))}
+            </ul>
+            <p className="mt-2 text-sm text-gray-500">{files.length} file(s) selected.</p>
+          </>
+        )}
+      </div>
     </div>
   )
 }
