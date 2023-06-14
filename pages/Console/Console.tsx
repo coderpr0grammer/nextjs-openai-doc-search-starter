@@ -2,15 +2,15 @@ import React, { useState } from 'react'
 import Head from 'next/head'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
-import { SearchDialog } from '@/components/SearchDialog'
+// import { SearchDialog } from '@/components/SearchDialog'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCloudArrowUp } from '@fortawesome/free-solid-svg-icons'
-import FileUploadBox from './FileUploadBox'
+import FileUploadBox from '../../components/FileUploadBox'
 
 const inter = Inter({ subsets: ['latin'] })
-export default function Home() {
+ const Console = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [isDragging, setIsDragging] = useState(false)
   const [files, setFiles] = useState<File[] | null>(null)
@@ -49,7 +49,7 @@ export default function Home() {
   const renderFilePreview = (file: File) => {
     if (file.type.startsWith('image/')) {
       return (
-        <img
+        <Image
           src={URL.createObjectURL(file)}
           alt={file.name}
           style={{ aspectRatio: '1 / 1', width: 50 }}
@@ -82,7 +82,7 @@ export default function Home() {
           />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link rel="icon" href="/favicon.ico" />
-        </Head>
+        </Head> 
         <main
           className={styles.main}
           onDrop={handleDrop}
@@ -145,3 +145,5 @@ export default function Home() {
     </>
   )
 }
+
+export default Console;
